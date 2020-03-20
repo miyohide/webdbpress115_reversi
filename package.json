@@ -4,6 +4,9 @@
   "main": "index.js",
   "author": "Hidenori Miyoshi <miyohide@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "test": "jest"
+  },
   "devDependencies": {
     "jest": "^25.1.0",
     "standard": "^14.3.2"
