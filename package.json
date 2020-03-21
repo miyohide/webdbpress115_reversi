@@ -7,6 +7,9 @@
   "scripts": {
     "test": "jest"
   },
+  "standard": {
+    "env": ["jest"]
+  },
   "devDependencies": {
     "@babel/core": "^7.8.7",
     "@babel/plugin-transform-modules-commonjs": "^7.8.3",
