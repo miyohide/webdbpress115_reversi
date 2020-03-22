@@ -27,7 +27,7 @@ test('initBoard returns board with 2 dark disks and 2 light disks', () => {
   }
 })
 
-test('when initial board and dark turn, checkCanPlace return true', () => {
+describe('when initial board', () => {
   /*
    * 初期のレイアウトに対する置ける石の場所を確認する
    * ・(2, 2) ・(3, 2) ・(4, 2) ・(5, 2)
@@ -35,54 +35,45 @@ test('when initial board and dark turn, checkCanPlace return true', () => {
    * ・(2, 4) ●(3, 4) ○(4, 4) ・(5, 4)
    * ・(2, 5) ・(3, 5) ・(4, 5) ・(5, 5)
    * 黒手番の場合、置ける場所は(2, 3) (3, 2) (4, 5) (5, 4)
-   */
-  expect(board.checkCanPlace(initBoard(), diskColor.dark, new Vec2(2, 3), false)).toBeTruthy()
-  expect(board.checkCanPlace(initBoard(), diskColor.dark, new Vec2(3, 2), false)).toBeTruthy()
-  expect(board.checkCanPlace(initBoard(), diskColor.dark, new Vec2(4, 5), false)).toBeTruthy()
-  expect(board.checkCanPlace(initBoard(), diskColor.dark, new Vec2(5, 4), false)).toBeTruthy()
-})
-
-test('when initial board and light turn, checkCanPlace return true', () => {
-  /*
-   * 初期のレイアウトに対する置ける石の場所を確認する
-   * ・(2, 2) ・(3, 2) ・(4, 2) ・(5, 2)
-   * ・(2, 3) ○(3, 3) ●(4, 3) ・(5, 3)
-   * ・(2, 4) ●(3, 4) ○(4, 4) ・(5, 4)
-   * ・(2, 5) ・(3, 5) ・(4, 5) ・(5, 5)
    * 白手番の場合、置ける場所は(2, 4) (3, 5) (4, 2) (5, 3)
    */
-  expect(board.checkCanPlace(initBoard(), diskColor.light, new Vec2(2, 4), false)).toBeTruthy()
-  expect(board.checkCanPlace(initBoard(), diskColor.light, new Vec2(3, 5), false)).toBeTruthy()
-  expect(board.checkCanPlace(initBoard(), diskColor.light, new Vec2(4, 2), false)).toBeTruthy()
-  expect(board.checkCanPlace(initBoard(), diskColor.light, new Vec2(5, 3), false)).toBeTruthy()
-})
+  test('all conditions are satisfied, checkCanPlace returns true', () => {
+    // 黒手番の確認
+    expect(board.checkCanPlace(initBoard(), diskColor.dark, new Vec2(2, 3), false)).toBeTruthy()
+    expect(board.checkCanPlace(initBoard(), diskColor.dark, new Vec2(3, 2), false)).toBeTruthy()
+    expect(board.checkCanPlace(initBoard(), diskColor.dark, new Vec2(4, 5), false)).toBeTruthy()
+    expect(board.checkCanPlace(initBoard(), diskColor.dark, new Vec2(5, 4), false)).toBeTruthy()
+    // 白手番の確認
+    expect(board.checkCanPlace(initBoard(), diskColor.light, new Vec2(2, 4), false)).toBeTruthy()
+    expect(board.checkCanPlace(initBoard(), diskColor.light, new Vec2(3, 5), false)).toBeTruthy()
+    expect(board.checkCanPlace(initBoard(), diskColor.light, new Vec2(4, 2), false)).toBeTruthy()
+    expect(board.checkCanPlace(initBoard(), diskColor.light, new Vec2(5, 3), false)).toBeTruthy()
+  })
 
-test('when next disk equal turn color, checkCanPlace return false', () => {
-  /*
-   * 初期のレイアウトに対する置ける石の場所を確認する
-   * ・(2, 2) ・(3, 2) ・(4, 2) ・(5, 2)
-   * ・(2, 3) ○(3, 3) ●(4, 3) ・(5, 3)
-   * ・(2, 4) ●(3, 4) ○(4, 4) ・(5, 4)
-   * ・(2, 5) ・(3, 5) ・(4, 5) ・(5, 5)
-   */
-  expect(board.checkCanPlace(initBoard(), diskColor.dark, new Vec2(4, 2), false)).toBeFalsy()
-  expect(board.checkCanPlace(initBoard(), diskColor.dark, new Vec2(5, 2), false)).toBeFalsy()
-  expect(board.checkCanPlace(initBoard(), diskColor.dark, new Vec2(5, 3), false)).toBeFalsy()
-  expect(board.checkCanPlace(initBoard(), diskColor.dark, new Vec2(2, 4), false)).toBeFalsy()
-  expect(board.checkCanPlace(initBoard(), diskColor.dark, new Vec2(2, 5), false)).toBeFalsy()
-  expect(board.checkCanPlace(initBoard(), diskColor.dark, new Vec2(3, 5), false)).toBeFalsy()
-  expect(board.checkCanPlace(initBoard(), diskColor.dark, new Vec2(5, 5), false)).toBeFalsy()
-})
+  test('and adjacent stones have the same color, checkCanPlace returns false', () => {
+    // 隣接する石が手番と同じ色
+    expect(board.checkCanPlace(initBoard(), diskColor.dark, new Vec2(4, 2), false)).toBeFalsy()
+    expect(board.checkCanPlace(initBoard(), diskColor.dark, new Vec2(5, 2), false)).toBeFalsy()
+    expect(board.checkCanPlace(initBoard(), diskColor.dark, new Vec2(5, 3), false)).toBeFalsy()
+    expect(board.checkCanPlace(initBoard(), diskColor.dark, new Vec2(2, 4), false)).toBeFalsy()
+    expect(board.checkCanPlace(initBoard(), diskColor.dark, new Vec2(2, 5), false)).toBeFalsy()
+    expect(board.checkCanPlace(initBoard(), diskColor.dark, new Vec2(3, 5), false)).toBeFalsy()
+    expect(board.checkCanPlace(initBoard(), diskColor.dark, new Vec2(5, 5), false)).toBeFalsy()
+  })
 
-test('when they are not sandwiched by same color, checkCanPlace return false', () => {
-  expect(board.checkCanPlace(initBoard(), diskColor.dark, new Vec2(2, 2), false)).toBeFalsy()
-  expect(board.checkCanPlace(initBoard(), diskColor.dark, new Vec2(5, 5), false)).toBeFalsy()
-})
+  test('and not sandwiched by the same color, checkCanPlace returns false', () => {
+    // 同じ色で挟んでいない
+    expect(board.checkCanPlace(initBoard(), diskColor.dark, new Vec2(2, 2), false)).toBeFalsy()
+    expect(board.checkCanPlace(initBoard(), diskColor.dark, new Vec2(5, 5), false)).toBeFalsy()
+  })
 
-test('when there is space, checkCanPlace return false', () => {
-  expect(board.checkCanPlace(initBoard(), diskColor.dark, new Vec2(1, 3), false)).toBeFalsy()
-})
+  test('and there is a gap, checkCanPlace returns false', () => {
+    // 間に石が置かれていない
+    expect(board.checkCanPlace(initBoard(), diskColor.dark, new Vec2(1, 3), false)).toBeFalsy()
+  })
 
-test('when there is disk, checkCanPlace return false', () => {
-  expect(board.checkCanPlace(initBoard(), diskColor.dark, new Vec2(3, 3), false)).toBeFalsy()
+  test('and stone is already placed, checkCanPlace returns false', () => {
+    // すでに石が置かれている
+    expect(board.checkCanPlace(initBoard(), diskColor.dark, new Vec2(3, 3), false)).toBeFalsy()
+  })
 })
