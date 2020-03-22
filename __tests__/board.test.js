@@ -77,3 +77,27 @@ describe('when initial board', () => {
     expect(board.checkCanPlace(initBoard(), diskColor.dark, new Vec2(3, 3), false)).toBeFalsy()
   })
 })
+
+describe('when initial board and reverse is true', () => {
+  /*
+   * 初期のレイアウトに対する置ける石の場所を確認する
+   * ・(2, 2) ・(3, 2) ・(4, 2) ・(5, 2)
+   * ・(2, 3) ○(3, 3) ●(4, 3) ・(5, 3)
+   * ・(2, 4) ●(3, 4) ○(4, 4) ・(5, 4)
+   * ・(2, 5) ・(3, 5) ・(4, 5) ・(5, 5)
+   * 黒手番の場合、置ける場所は(2, 3) (3, 2) (4, 5) (5, 4)
+   * 白手番の場合、置ける場所は(2, 4) (3, 5) (4, 2) (5, 3)
+   */
+  test('checkCanPlace update board', () => {
+    const b = initBoard()
+    board.checkCanPlace(b, diskColor.dark, new Vec2(2, 3), true)
+    // 置いた石は更新されないので注意
+    expect(b[2][3]).toBe(diskColor.none)
+    // light -> darkになることを確認
+    expect(b[3][3]).toBe(diskColor.dark)
+    // 他は変更されていないことを確認
+    expect(b[4][3]).toBe(diskColor.dark)
+    expect(b[3][4]).toBe(diskColor.dark)
+    expect(b[4][4]).toBe(diskColor.light)
+  })
+})
