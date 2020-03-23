@@ -101,3 +101,16 @@ describe('when initial board and reverse is true', () => {
     expect(b[4][4]).toBe(diskColor.light)
   })
 })
+
+test('When initial board, checkCanPlaceAll returns true', () => {
+  expect(board.checkCanPlaceAll(initBoard(), diskColor.dark)).toBeTruthy()
+  expect(board.checkCanPlaceAll(initBoard(), diskColor.light)).toBeTruthy()
+})
+
+test('All stones are dark, checkCanPlaceALl returns false', () => {
+  const b = initBoard()
+  b[3][3] = diskColor.dark
+  b[4][4] = diskColor.dark
+  expect(board.checkCanPlaceAll(b, diskColor.dark)).toBeFalsy()
+  expect(board.checkCanPlaceAll(b, diskColor.light)).toBeFalsy()
+})
