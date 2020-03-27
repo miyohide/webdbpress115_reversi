@@ -1,4 +1,4 @@
-import { countDisk, isGameEnd, takeTurn } from '../lib/game'
+import { countDisk, isGameEnd, takeTurn, winnerMessage } from '../lib/game'
 import { diskColor } from '../lib/const'
 import { initBoard } from '../lib/board'
 
@@ -44,4 +44,22 @@ test('when all light, countDisk returns [0, 4]', () => {
   b[4][3] = diskColor.light
   b[3][4] = diskColor.light
   expect(countDisk(b)).toEqual([0, 4])
+})
+
+test('when initial board, winnerMessage returns draw', () => {
+  expect(winnerMessage(initBoard())).toEqual('黒:2 - 白:2<br>引き分けです<br><br>')
+})
+
+test('when all dark, winnerMessage returns dark win', () => {
+  const b = initBoard()
+  b[3][3] = diskColor.dark
+  b[4][4] = diskColor.dark
+  expect(winnerMessage(b)).toEqual('黒:4 - 白:0<br>黒の勝ちです。<br><br>')
+})
+
+test('when all light, winnerMessage returns light win', () => {
+  const b = initBoard()
+  b[4][3] = diskColor.light
+  b[3][4] = diskColor.light
+  expect(winnerMessage(b)).toEqual('黒:0 - 白:4<br>白の勝ちです。<br><br>')
 })
