@@ -114,3 +114,8 @@ test('All stones are dark, checkCanPlaceALl returns false', () => {
   expect(board.checkCanPlaceAll(b, diskColor.dark)).toBeFalsy()
   expect(board.checkCanPlaceAll(b, diskColor.light)).toBeFalsy()
 })
+
+test('renderBoard returns render Board', () => {
+  expect(board.renderBoard(initBoard(), new Vec2(0, 0))).toEqual(
+    '・・・・・・・・←<br>・・・・・・・・<br>・・・・・・・・<br>・・・○●・・・<br>・・・●○・・・<br>・・・・・・・・<br>・・・・・・・・<br>・・・・・・・・<br>↑　　　　　　　<br>')
+})
