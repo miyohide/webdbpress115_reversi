@@ -5,7 +5,7 @@
   "author": "Hidenori Miyoshi <miyohide@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "standard": {
     "env": ["jest"]
