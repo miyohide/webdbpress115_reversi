@@ -1,3 +1,5 @@
+[![codecov](https://codecov.io/gh/miyohide/webdbpress115_reversi/branch/master/graph/badge.svg)](https://codecov.io/gh/miyohide/webdbpress115_reversi)
+
 # これは何か
 
 WEB+DB PRESS Vol.115の写経用リポジトリです。
