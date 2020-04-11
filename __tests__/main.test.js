@@ -12,7 +12,7 @@ function blackTurn () {
 }
 
 function initialPage () {
-  let page = '・・・・・・・・←<br>'
+  let page = nonDiskWithCurrentLine()
   page += nonDisk()
   page += nonDisk()
   page += '・・・○●・・・<br>'
@@ -30,6 +30,10 @@ function nonDisk () {
   return '・・・・・・・・<br>'
 }
 
+function nonDiskWithCurrentLine () {
+  return '・・・・・・・・←<br>'
+}
+
 function moveUpFromInitialPage () {
   let page = nonDisk()
   page += nonDisk()
@@ -38,7 +42,7 @@ function moveUpFromInitialPage () {
   page += '・・・●○・・・<br>'
   page += nonDisk()
   page += nonDisk()
-  page += '・・・・・・・・←<br>'
+  page += nonDiskWithCurrentLine()
   page += '↑　　　　　　　<br>'
   page += blackTurn()
   page += gameExplain()
