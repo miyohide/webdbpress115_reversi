@@ -11,6 +11,14 @@ function blackTurn () {
   return '<br>黒のターンです。<br><br>\n'
 }
 
+function nonDisk () {
+  return '・・・・・・・・<br>'
+}
+
+function nonDiskWithCurrentLine () {
+  return '・・・・・・・・←<br>'
+}
+
 function initialPage () {
   let page = nonDiskWithCurrentLine()
   page += nonDisk()
@@ -24,14 +32,6 @@ function initialPage () {
   page += blackTurn()
   page += gameExplain()
   return page
-}
-
-function nonDisk () {
-  return '・・・・・・・・<br>'
-}
-
-function nonDiskWithCurrentLine () {
-  return '・・・・・・・・←<br>'
 }
 
 function moveUpFromInitialPage () {
