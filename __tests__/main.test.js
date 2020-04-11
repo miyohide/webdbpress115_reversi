@@ -7,32 +7,40 @@ function gameExplain () {
   return explain
 }
 
+function blackTurn () {
+  return '<br>黒のターンです。<br><br>\n'
+}
+
 function initialPage () {
   let page = '・・・・・・・・←<br>'
-  page += '・・・・・・・・<br>'
-  page += '・・・・・・・・<br>'
+  page += nonDisk()
+  page += nonDisk()
   page += '・・・○●・・・<br>'
   page += '・・・●○・・・<br>'
-  page += '・・・・・・・・<br>'
-  page += '・・・・・・・・<br>'
-  page += '・・・・・・・・<br>'
+  page += nonDisk()
+  page += nonDisk()
+  page += nonDisk()
   page += '↑　　　　　　　<br>'
-  page += '<br>黒のターンです。<br><br>\n'
+  page += blackTurn()
   page += gameExplain()
   return page
 }
 
+function nonDisk () {
+  return '・・・・・・・・<br>'
+}
+
 function moveUpFromInitialPage () {
-  let page = '・・・・・・・・<br>'
-  page += '・・・・・・・・<br>'
-  page += '・・・・・・・・<br>'
+  let page = nonDisk()
+  page += nonDisk()
+  page += nonDisk()
   page += '・・・○●・・・<br>'
   page += '・・・●○・・・<br>'
-  page += '・・・・・・・・<br>'
-  page += '・・・・・・・・<br>'
+  page += nonDisk()
+  page += nonDisk()
   page += '・・・・・・・・←<br>'
   page += '↑　　　　　　　<br>'
-  page += '<br>黒のターンです。<br><br>\n'
+  page += blackTurn()
   page += gameExplain()
   return page
 }
