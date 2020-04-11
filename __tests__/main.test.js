@@ -49,6 +49,21 @@ function moveUpFromInitialPage () {
   return page
 }
 
+function moveDownFromInitialPage () {
+  let page = nonDisk()
+  page += nonDiskWithCurrentLine()
+  page += nonDisk()
+  page += '・・・○●・・・<br>'
+  page += '・・・●○・・・<br>'
+  page += nonDisk()
+  page += nonDisk()
+  page += nonDisk()
+  page += '↑　　　　　　　<br>'
+  page += blackTurn()
+  page += gameExplain()
+  return page
+}
+
 test('initial load', () => {
   document.body.innerHTML = '<div></div>'
   require('../lib/main')
@@ -63,4 +78,13 @@ test('when w key down, move up', () => {
   main.onKeyDown(wDown)
   const div = document.querySelector('div')
   expect(div.innerHTML).toEqual(moveUpFromInitialPage())
+})
+
+test('when s key down, move up', () => {
+  document.body.innerHTML = '<div></div>'
+  const main = require('../lib/main')
+  const sDown = new window.KeyboardEvent('keydown', { key: 's' })
+  main.onKeyDown(sDown)
+  const div = document.querySelector('div')
+  expect(div.innerHTML).toEqual(moveDownFromInitialPage())
 })
