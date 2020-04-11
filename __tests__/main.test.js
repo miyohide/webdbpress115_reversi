@@ -1,3 +1,12 @@
+function gameExplain () {
+  let explain = '      [w]:カーソルを上に移動<br>\n'
+  explain += '      [s]:カーソルを下に移動<br>\n'
+  explain += '      [a]:カーソルを左に移動<br>\n'
+  explain += '      [d]:カーソルを右に移動<br>\n'
+  explain += '      [その他のキー]:石を置く'
+  return explain
+}
+
 function initialPage () {
   let page = '・・・・・・・・←<br>'
   page += '・・・・・・・・<br>'
@@ -9,11 +18,7 @@ function initialPage () {
   page += '・・・・・・・・<br>'
   page += '↑　　　　　　　<br>'
   page += '<br>黒のターンです。<br><br>\n'
-  page += '      [w]:カーソルを上に移動<br>\n'
-  page += '      [s]:カーソルを下に移動<br>\n'
-  page += '      [a]:カーソルを左に移動<br>\n'
-  page += '      [d]:カーソルを右に移動<br>\n'
-  page += '      [その他のキー]:石を置く'
+  page += gameExplain()
   return page
 }
 
@@ -28,11 +33,7 @@ function moveUpFromInitialPage () {
   page += '・・・・・・・・←<br>'
   page += '↑　　　　　　　<br>'
   page += '<br>黒のターンです。<br><br>\n'
-  page += '      [w]:カーソルを上に移動<br>\n'
-  page += '      [s]:カーソルを下に移動<br>\n'
-  page += '      [a]:カーソルを左に移動<br>\n'
-  page += '      [d]:カーソルを右に移動<br>\n'
-  page += '      [その他のキー]:石を置く'
+  page += gameExplain()
   return page
 }
 
