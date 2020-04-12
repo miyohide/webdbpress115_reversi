@@ -79,36 +79,63 @@ function moveRightFromInitialPage () {
   return page
 }
 
-test('initial load', () => {
-  document.body.innerHTML = '<div></div>'
-  require('../lib/main')
-  const div = document.querySelector('div')
-  expect(div.innerHTML).toEqual(initialPage())
-})
+function moveLeftFromInitialPage () {
+  let page = nonDiskWithCurrentLine()
+  page += nonDisk()
+  page += nonDisk()
+  page += '・・・○●・・・<br>'
+  page += '・・・●○・・・<br>'
+  page += nonDisk()
+  page += nonDisk()
+  page += nonDisk()
+  page += '　　　　　　　↑<br>'
+  page += blackTurn()
+  page += gameExplain()
+  return page
+}
 
-test('when w key down, move up', () => {
-  document.body.innerHTML = '<div></div>'
-  const main = require('../lib/main')
-  const wDown = new window.KeyboardEvent('keydown', { key: 'w' })
-  main.onKeyDown(wDown)
-  const div = document.querySelector('div')
-  expect(div.innerHTML).toEqual(moveUpFromInitialPage())
-})
+describe('onKeydown', () => {
+  let main
 
-test('when s key down, move up', () => {
-  document.body.innerHTML = '<div></div>'
-  const main = require('../lib/main')
-  const sDown = new window.KeyboardEvent('keydown', { key: 's' })
-  main.onKeyDown(sDown)
-  const div = document.querySelector('div')
-  expect(div.innerHTML).toEqual(moveDownFromInitialPage())
-})
+  beforeAll(() => {
+    document.body.innerHTML = '<div></div>'
+    main = require('../lib/main')
+  })
 
-test('when d key down, move right', () => {
-  document.body.innerHTML = '<div></div>'
-  const main = require('../lib/main')
-  const dDown = new window.KeyboardEvent('keydown', { key: 'd' })
-  main.onKeyDown(dDown)
-  const div = document.querySelector('div')
-  expect(div.innerHTML).toEqual(moveRightFromInitialPage())
+  beforeEach(() => {
+    main.init()
+  })
+
+  test('initial load', () => {
+    const div = document.querySelector('div')
+    expect(div.innerHTML).toEqual(initialPage())
+  })
+
+  test('when w key down, move up', () => {
+    const wDown = new window.KeyboardEvent('keydown', { key: 'w' })
+    main.onKeyDown(wDown)
+    const div = document.querySelector('div')
+    expect(div.innerHTML).toEqual(moveUpFromInitialPage())
+  })
+
+  test('when s key down, move down', () => {
+    const sDown = new window.KeyboardEvent('keydown', { key: 's' })
+    main.onKeyDown(sDown)
+    const div = document.querySelector('div')
+    expect(div.innerHTML).toEqual(moveDownFromInitialPage())
+  })
+
+  test('when d key down, move right', () => {
+    const dDown = new window.KeyboardEvent('keydown', { key: 'd' })
+    main.onKeyDown(dDown)
+    const div = document.querySelector('div')
+    expect(div.innerHTML).toEqual(moveRightFromInitialPage())
+  })
+
+  test('when a key down, move left', () => {
+    const aDown = new window.KeyboardEvent('keydown', { key: 'a' })
+    main.onKeyDown(aDown)
+    const div = document.querySelector('div')
+    expect(div.innerHTML).toEqual(moveLeftFromInitialPage())
+  })
 })
