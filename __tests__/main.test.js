@@ -34,6 +34,22 @@ function initialPage () {
   return page
 }
 
+function initialPageWithErrormessage () {
+  let page = nonDiskWithCurrentLine()
+  page += nonDisk()
+  page += nonDisk()
+  page += '・・・○●・・・<br>'
+  page += '・・・●○・・・<br>'
+  page += nonDisk()
+  page += nonDisk()
+  page += nonDisk()
+  page += '↑　　　　　　　<br>'
+  page += '<br>そこには置けません。'
+  page += blackTurn()
+  page += gameExplain()
+  return page
+}
+
 function moveUpFromInitialPage () {
   let page = nonDisk()
   page += nonDisk()
@@ -137,5 +153,12 @@ describe('onKeydown', () => {
     main.onKeyDown(aDown)
     const div = document.querySelector('div')
     expect(div.innerHTML).toEqual(moveLeftFromInitialPage())
+  })
+
+  test('when x key down, show a error message', () => {
+    const xDown = new window.KeyboardEvent('keydown', { key: 'x' })
+    main.onKeyDown(xDown)
+    const div = document.querySelector('div')
+    expect(div.innerHTML).toEqual(initialPageWithErrormessage())
   })
 })
