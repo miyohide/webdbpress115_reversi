@@ -11,6 +11,10 @@ function blackTurn () {
   return '<br>黒のターンです。<br><br>\n'
 }
 
+function whiteTurn () {
+  return '<br>白のターンです。<br><br>\n'
+}
+
 function nonDisk () {
   return '・・・・・・・・<br>'
 }
@@ -110,6 +114,21 @@ function moveLeftFromInitialPage () {
   return page
 }
 
+function turnBlack () {
+  let page = nonDisk()
+  page += nonDisk()
+  page += nonDisk()
+  page += '・・●●●・・・←<br>'
+  page += '・・・●○・・・<br>'
+  page += nonDisk()
+  page += nonDisk()
+  page += nonDisk()
+  page += '　　↑　　　　　<br>'
+  page += whiteTurn()
+  page += gameExplain()
+  return page
+}
+
 describe('onKeydown', () => {
   let main
 
@@ -160,5 +179,19 @@ describe('onKeydown', () => {
     main.onKeyDown(xDown)
     const div = document.querySelector('div')
     expect(div.innerHTML).toEqual(initialPageWithErrormessage())
+  })
+
+  test('change black disk', () => {
+    const sDown = new window.KeyboardEvent('keydown', { key: 's' })
+    const dDown = new window.KeyboardEvent('keydown', { key: 'd' })
+    const xDown = new window.KeyboardEvent('keydown', { key: 'x' })
+    main.onKeyDown(sDown)
+    main.onKeyDown(sDown)
+    main.onKeyDown(sDown)
+    main.onKeyDown(dDown)
+    main.onKeyDown(dDown)
+    main.onKeyDown(xDown)
+    const div = document.querySelector('div')
+    expect(div.innerHTML).toEqual(turnBlack())
   })
 })
