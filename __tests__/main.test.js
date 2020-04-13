@@ -160,7 +160,7 @@ describe('onKeydown', () => {
     expect(div.innerHTML).toEqual(moveDownFromInitialPage())
   })
 
-  test('when s key down * 8, move top position', () => {
+  test('when s key down 8 times, move top position', () => {
     const sDown = new window.KeyboardEvent('keydown', { key: 's' })
     for (let i = 0; i < 8; i++) {
       main.onKeyDown(sDown)
