@@ -160,6 +160,15 @@ describe('onKeydown', () => {
     expect(div.innerHTML).toEqual(moveDownFromInitialPage())
   })
 
+  test('when s key down * 8, move top position', () => {
+    const sDown = new window.KeyboardEvent('keydown', { key: 's' })
+    for (let i = 0; i < 8; i++) {
+      main.onKeyDown(sDown)
+    }
+    const div = document.querySelector('div')
+    expect(div.innerHTML).toEqual(initialPage())
+  })
+
   test('when d key down, move right', () => {
     const dDown = new window.KeyboardEvent('keydown', { key: 'd' })
     main.onKeyDown(dDown)
