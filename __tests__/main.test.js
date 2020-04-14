@@ -176,6 +176,15 @@ describe('onKeydown', () => {
     expect(div.innerHTML).toEqual(moveRightFromInitialPage())
   })
 
+  test('when d key down 8 times, render initial page', () => {
+    const dDown = new window.KeyboardEvent('keydown', { key: 'd' })
+    for (let i = 0; i < 8; i++) {
+      main.onKeyDown(dDown)
+    }
+    const div = document.querySelector('div')
+    expect(div.innerHTML).toEqual(initialPage())
+  })
+
   test('when a key down, move left', () => {
     const aDown = new window.KeyboardEvent('keydown', { key: 'a' })
     main.onKeyDown(aDown)
